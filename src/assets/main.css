@@ -1279,9 +1279,13 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
    RESPONSIVE
 ================================================================ */
 @media (max-width: 900px) {
+  .nav {
+    display: flex;
+    justify-content: space-between;
+  }
   .nav-links    { display: none; }
   .nav-lang     { display: none; }
-  .nav-phone    { padding: 7px 16px; font-size: 12px; }
+  .nav-phone    { display: none; }
   .hamburger    { display: flex; }
 
   .asym { grid-template-columns: 1fr; gap: 0; }
