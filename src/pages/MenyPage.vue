@@ -2,6 +2,7 @@
 import { ref, computed, watch, nextTick } from 'vue'
 import { useReveal } from '../composables/useReveal.js'
 import { avhamtning, alacarte } from '../data/menu.js'
+import { lunchVecka } from '../data/lunch.js'
 import { t, lang } from '../composables/useLanguage.js'
 import SiteFooter from '../components/SiteFooter.vue'
 
@@ -28,7 +29,7 @@ const avhamtningLocalized = computed(() => avhamtning.map(localiseSection))
 const alacarteLocalized    = computed(() => alacarte.map(localiseSection))
 
 // Avhämtning accordion — first section open by default
-const openSections = ref(new Set([avhamtning[0]?.title]))
+const openSections = ref(new Set())
 
 function toggleSection(title) {
   const s = new Set(openSections.value)
@@ -55,7 +56,7 @@ watch(activeTab, () => {
     <!-- HERO -->
     <section class="meny-hero">
       <div class="meny-hero-media">
-        <img src="/images/foto-5.png" alt="Klinte Pizzeria Meny">
+        <img src="/images/menyresim.webp" alt="Klinte Pizzeria Meny">
       </div>
       <div class="meny-hero-overlay"></div>
       <div class="meny-hero-content">
@@ -73,6 +74,9 @@ watch(activeTab, () => {
         <button :class="{ active: activeTab === 'alacarte' }" @click="activeTab = 'alacarte'">
           {{ t('meny_tab_alacarte') }}
         </button>
+        <button :class="{ active: activeTab === 'lunch' }" @click="activeTab = 'lunch'">
+          {{ lang === 'en' ? 'Weekly Lunch' : 'Veckans Lunch' }}
+        </button>
       </div>
     </div>
 
@@ -84,8 +88,13 @@ watch(activeTab, () => {
           <template v-if="activeTab === 'avhamtning'">
             {{ t('meny_note_avhamtning') }}
           </template>
-          <template v-else>
+          <template v-else-if="activeTab === 'alacarte'">
             {{ t('meny_note_alacarte') }}
+          </template>
+          <template v-else>
+            {{ lang === 'en'
+              ? `Lunch buffet ${lunchVecka.pris_buffet} · Takeaway ${lunchVecka.pris_avhamtning} · ${lunchVecka.note}`
+              : `Lunchbuffe ${lunchVecka.pris_buffet} · Avhämtning ${lunchVecka.pris_avhamtning} · ${lunchVecka.note}` }}
           </template>
         </div>
 
@@ -146,7 +155,7 @@ watch(activeTab, () => {
         </div>
 
         <!-- ══════════ À LA CARTE ══════════ -->
-        <div v-else class="tab-content meny-card">
+        <div v-else-if="activeTab === 'alacarte'" class="tab-content meny-card">
           <template v-for="(section, si) in alacarteLocalized" :key="section.title">
             <div class="meny-section">
               <div class="meny-section-header">
@@ -171,6 +180,32 @@ watch(activeTab, () => {
             </div>
             <div v-if="si < alacarteLocalized.length - 1" class="meny-divider"><span></span></div>
           </template>
+        </div>
+
+        <!-- ══════════ VECKANS LUNCH ══════════ -->
+        <div v-if="activeTab === 'lunch'" class="tab-content meny-card lunch-card">
+          <div class="lunch-header">
+            <span class="lunch-week-label">{{ lang === 'en' ? 'Week' : 'Vecka' }}</span>
+            <span class="lunch-week-num">{{ lunchVecka.vecka }}</span>
+          </div>
+
+          <div
+            v-for="d in lunchVecka.days"
+            :key="d.day"
+            class="lunch-day"
+          >
+            <div class="lunch-day-name">{{ lang === 'en' ? d.day_en : d.day }}</div>
+            <div class="lunch-day-dishes">
+              <p v-for="(dish, i) in (lang === 'en' ? d.dishes_en : d.dishes)" :key="i">
+                {{ dish }}
+              </p>
+            </div>
+          </div>
+
+          <div class="lunch-footer">
+            <span>{{ lang === 'en' ? 'Soft drinks not included' : 'Läsk ingår ej' }}</span>
+            <span class="lunch-welcome">{{ lang === 'en' ? 'Welcome!' : 'Välkomna!' }}</span>
+          </div>
         </div>
 
         <!-- Ornament bottom -->
@@ -519,11 +554,112 @@ watch(activeTab, () => {
   background: var(--border);
 }
 
+/* ══════════════════════════════════
+   VECKANS LUNCH
+══════════════════════════════════ */
+.lunch-card {
+  overflow: hidden;
+}
+
+.lunch-header {
+  padding: clamp(28px, 4vw, 48px) clamp(24px, 4vw, 48px) 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.lunch-week-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.lunch-week-num {
+  font-family: var(--font-serif);
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--green-dim);
+  line-height: 1;
+}
+
+.lunch-header-sub {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-muted);
+  width: 100%;
+  margin-top: 4px;
+}
+
+.lunch-header-sub strong {
+  font-weight: 500;
+  color: var(--green);
+}
+
+.lunch-day {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 18px clamp(24px, 4vw, 48px);
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+  transition: padding-left 0.25s var(--ease);
+}
+
+.lunch-day:hover {
+  padding-left: calc(clamp(24px, 4vw, 48px) + 6px);
+}
+
+.lunch-day:last-of-type {
+  border-bottom: none;
+}
+
+.lunch-day-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--green-dark);
+  padding-top: 2px;
+}
+
+.lunch-day-dishes p {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-soft);
+  line-height: 1.7;
+}
+
+.lunch-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px clamp(24px, 4vw, 48px);
+  border-top: 1px solid var(--border);
+  background: var(--green-muted);
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.lunch-welcome {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-style: italic;
+  color: var(--green);
+  font-weight: 500;
+}
+
 @media (max-width: 600px) {
   .acc-header-left { gap: 12px; }
   .meny-section-header { flex-direction: column; gap: 8px; }
   .meny-item { flex-wrap: wrap; }
   .meny-item-dots { display: none; }
   .meny-item-price { margin-top: 4px; }
+  .lunch-day { grid-template-columns: 1fr; gap: 6px; }
+  .lunch-footer { flex-direction: column; gap: 8px; text-align: center; }
 }
 </style>

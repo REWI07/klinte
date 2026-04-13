@@ -9,7 +9,13 @@ import MenyPage from './pages/MenyPage.vue'
 import BokaBordPage from './pages/BokaBordPage.vue'
 import KontaktPage from './pages/KontaktPage.vue'
 
-const { currentPage } = provideApp()
+const { currentPage, veilState } = provideApp()
+
+const veilClass = computed(() => {
+  if (veilState.value === 'entering') return 'page-veil entering'
+  if (veilState.value === 'leaving')  return 'page-veil leaving'
+  return 'page-veil'
+})
 const dataReady = ref(false)
 
 onMounted(async () => {
@@ -32,6 +38,15 @@ const currentComponent = computed(() => pages[currentPage.value] || HemPage)
 
 <template>
   <div>
+    <div :class="veilClass">
+      <div class="veil-panel veil-panel-top"></div>
+      <div class="veil-panel veil-panel-bottom"></div>
+      <div class="veil-brand">
+        <span class="veil-name">Klinte</span>
+        <div class="veil-divider"></div>
+        <span class="veil-tagline">Pizzeria</span>
+      </div>
+    </div>
     <template v-if="dataReady">
       <NavBar />
       <component :is="currentComponent" :key="currentPage" />
@@ -53,4 +68,5 @@ const currentComponent = computed(() => pages[currentPage.value] || HemPage)
   font-style: italic;
   color: var(--green);
 }
+
 </style>

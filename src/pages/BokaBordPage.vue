@@ -193,11 +193,6 @@ async function submit() {
             </div>
           </div>
 
-          <!-- Calendar placeholder -->
-          <div class="cal-placeholder">
-            <p class="cal-label">{{ t('boka_cal_label') }}</p>
-            <p class="cal-text">{{ t('boka_cal_text') }}</p>
-          </div>
         </div>
 
       </div>

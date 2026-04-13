@@ -4,8 +4,7 @@ export const settings = ref({
   phone_main: '073-560 85 23',
   phone_main_tel: 'tel:073-56085 23',
   email: 'klintepizzeria@gmail.com',
-  facebook_url: '#',
-  instagram_url: '#',
+  facebook_url: 'https://www.facebook.com/Klinte.Restaurang.Pizzeria/',
 })
 
 let loaded = false

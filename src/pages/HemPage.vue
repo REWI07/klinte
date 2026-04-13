@@ -13,14 +13,10 @@ useReveal(pageRef)
 
 const marqueeItems = computed(() =>
   lang.value === 'en'
-    ? ['Handmade Pizza', 'Pasta', 'Grill & Kebab', 'Klintehamn',
-       'By the Sea', 'Gotland', 'Takeaway', 'Restaurant',
-       'Handmade Pizza', 'Pasta', 'Grill & Kebab', 'Klintehamn',
-       'By the Sea', 'Gotland', 'Takeaway', 'Restaurant']
-    : ['Handgjord pizza', 'Pasta', 'Grill & Kebab', 'Klintehamn',
-       'Vid havet', 'Gotland', 'Avhämtning', 'Restaurang',
-       'Handgjord pizza', 'Pasta', 'Grill & Kebab', 'Klintehamn',
-       'Vid havet', 'Gotland', 'Avhämtning', 'Restaurang']
+    ? ['Handmade Pizza', 'Pasta', 'Grill & Kebab', 'Takeaway', 'À la Carte', 'Restaurant', 'Billiards & Darts', 'Bar',
+       'Handmade Pizza', 'Pasta', 'Grill & Kebab', 'Takeaway', 'À la Carte', 'Restaurant', 'Billiards & Darts', 'Bar']
+    : ['Handgjord pizza', 'Pasta', 'Grill & Kebab', 'Avhämtning', 'À la Carte', 'Restaurang', 'Biljard & Dart', 'Bar',
+       'Handgjord pizza', 'Pasta', 'Grill & Kebab', 'Avhämtning', 'À la Carte', 'Restaurang', 'Biljard & Dart', 'Bar']
 )
 </script>
 
@@ -30,7 +26,7 @@ const marqueeItems = computed(() =>
     <!-- HERO -->
     <section class="hero">
       <div class="hero-media">
-        <img src="/images/foto-1.png" alt="Klinte Pizzeria">
+        <img src="/images/gun-batimi.webp" alt="Klinte Pizzeria">
       </div>
       <div class="hero-overlay"></div>
       <div class="hero-inner">
@@ -59,10 +55,10 @@ const marqueeItems = computed(() =>
     </div>
 
     <!-- ABOUT -->
-    <section class="ed-section">
+    <section class="ed-section about-section">
       <div class="asym asym-sticky reveal">
         <div class="asym-img">
-          <img src="/images/foto-3.png" alt="Klinte Pizzeria interiör">
+          <img src="/images/kontakt-hero.jpg" alt="Klinte Pizzeria interiör">
         </div>
         <div class="asym-body">
           <p class="ed-label">{{ t('about_label') }}</p>
@@ -76,59 +72,39 @@ const marqueeItems = computed(() =>
     </section>
 
     <!-- SERVICES -->
-    <div class="services-row reveal">
-      <div class="svc-card">
-        <div class="svc-num">01</div>
-        <h3 class="svc-title">{{ t('feat_pizza_title') }}</h3>
-        <p class="svc-text">{{ t('feat_pizza_text') }}</p>
-        <div class="svc-line"></div>
+    <div class="services-row">
+      <div class="svc-card svc-card-bg" style="--svc-bg: url('/images/pizza3.webp')">
+        <div class="svc-card-overlay"></div>
+        <div class="svc-card-content">
+          <div class="svc-num">01</div>
+          <h3 class="svc-title">{{ t('feat_pizza_title') }}</h3>
+          <p class="svc-text">{{ t('feat_pizza_text') }}</p>
+          <div class="svc-line"></div>
+        </div>
       </div>
-      <div class="svc-card">
-        <div class="svc-num">02</div>
-        <h3 class="svc-title">{{ t('feat_grill_title') }}</h3>
-        <p class="svc-text">{{ t('feat_grill_text') }}</p>
-        <div class="svc-line"></div>
+      <div class="svc-card svc-card-bg" style="--svc-bg: url('/images/kebab2.webp')">
+        <div class="svc-card-overlay"></div>
+        <div class="svc-card-content">
+          <div class="svc-num">02</div>
+          <h3 class="svc-title">{{ t('feat_grill_title') }}</h3>
+          <p class="svc-text">{{ t('feat_grill_text') }}</p>
+          <div class="svc-line"></div>
+        </div>
       </div>
-      <div class="svc-card">
-        <div class="svc-num">03</div>
-        <h3 class="svc-title">{{ t('feat_bar_title') }}</h3>
-        <p class="svc-text">{{ t('feat_bar_text') }}</p>
-        <div class="svc-line"></div>
+      <div class="svc-card svc-card-bg" style="--svc-bg: url('/images/bilardo.webp')">
+        <div class="svc-card-overlay"></div>
+        <div class="svc-card-content">
+          <div class="svc-num">03</div>
+          <h3 class="svc-title">{{ t('feat_bar_title') }}</h3>
+          <p class="svc-text">{{ t('feat_bar_text') }}</p>
+          <div class="svc-line"></div>
+        </div>
       </div>
     </div>
 
-    <!-- IMMERSIVE — Pizza section -->
-    <section class="immersive reveal">
-      <div class="immersive-bg">
-        <img src="/images/foto-2.png" alt="Klinte Pizzeria pizza">
-      </div>
-      <div class="immersive-overlay"></div>
-      <div class="immersive-content">
-        <p class="ed-label">{{ t('imm1_label') }}</p>
-        <h2 class="ed-heading" v-html="t('imm1_title')"></h2>
-        <hr class="ed-hr">
-        <p class="ed-text" style="margin-bottom:28px;">{{ t('imm1_text') }}</p>
-        <button class="btn btn-green" @click="navigate('meny')">{{ t('imm1_btn') }}</button>
-      </div>
-    </section>
-
-    <!-- IMMERSIVE — Waterfront -->
-    <section class="immersive center reveal">
-      <div class="immersive-bg">
-        <img src="/images/foto-4.png" alt="Klintehamn hamn">
-      </div>
-      <div class="immersive-overlay" style="background:linear-gradient(180deg, var(--bg) 0%, rgba(14,31,9,0.3) 20%, rgba(14,31,9,0.3) 80%, var(--bg) 100%);"></div>
-      <div class="immersive-content">
-        <p class="ed-label">Klintehamn · Gotland</p>
-        <h2 class="ed-heading" v-html="t('imm2_title')"></h2>
-        <hr class="ed-hr">
-        <p class="ed-text">{{ t('imm2_text') }}</p>
-      </div>
-    </section>
-
     <!-- CTA -->
     <section class="ed-section" style="text-align:center;">
-      <div class="reveal">
+      <div>
         <p class="ed-label" style="justify-content:center;display:flex;">{{ t('cta_label') }}</p>
         <h2 class="ed-heading" style="max-width:700px;margin:0 auto 24px;" v-html="t('cta_title')"></h2>
         <p class="ed-text" style="max-width:480px;margin:0 auto 40px;text-align:center;">{{ t('cta_text') }}</p>

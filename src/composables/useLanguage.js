@@ -24,7 +24,7 @@ const translations = {
 
     // About
     about_label:  'Om oss',
-    about_title:  'En smak av Italien <em>vid kusten</em>',
+    about_title:  'Handgjord mat <em>vid kusten</em>',
     about_text:   'Klinte Pizzeria ligger i hjärtat av Klintehamn, ett stenkast från hav, hamn och båtarna till Karlsöarna. Sedan starten har vi serverat handgjord pizza, krämig pasta och grillrätter med råvaror vi är stolta över.',
     about_text_2: 'Oavsett om du kommer för en snabb avhämtning eller vill slå dig ned för en längre middag — vi välkomnar dig med öppna armar och ett fullt bord.',
     about_btn:    'Se vår meny',
@@ -116,7 +116,7 @@ const translations = {
 
     // Footer
     footer_desc:   'Handgjord pizza, pasta och grill i hjärtat av Klintehamn — ett stenkast från hav och hamn.',
-    footer_rights: '© 2025 Klinte Pizzeria. Alla rättigheter förbehållna.',
+    footer_rights: '© 2026 Klinte Pizzeria. Alla rättigheter förbehållna.',
   },
 
   en: {
@@ -136,7 +136,7 @@ const translations = {
 
     // About
     about_label:  'About us',
-    about_title:  'A taste of Italy <em>by the coast</em>',
+    about_title:  'Handmade food <em>by the coast</em>',
     about_text:   'Klinte Pizzeria is located in the heart of Klintehamn, a stone\'s throw from the sea, harbour and boats to Karlsöarna. Since we opened, we\'ve served handmade pizza, creamy pasta and grilled dishes with ingredients we\'re proud of.',
     about_text_2: 'Whether you come for a quick takeaway or want to sit down for a longer dinner — we welcome you with open arms and a full table.',
     about_btn:    'View our menu',
@@ -228,7 +228,7 @@ const translations = {
 
     // Footer
     footer_desc:   'Handmade pizza, pasta and grill in the heart of Klintehamn — a stone\'s throw from the sea and harbour.',
-    footer_rights: '© 2025 Klinte Pizzeria. All rights reserved.',
+    footer_rights: '© 2026 Klinte Pizzeria. All rights reserved.',
   },
 }
 

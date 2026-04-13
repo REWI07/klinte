@@ -93,8 +93,6 @@ async function submit() {
           </div>
           <div class="contact-block">
             <h3>{{ t('contact_social') }}</h3>
-            <a :href="settings.instagram_url" target="_blank" rel="noopener">Instagram</a>
-            <span style="color:var(--text-dim);margin:0 8px;">·</span>
             <a :href="settings.facebook_url" target="_blank" rel="noopener">Facebook</a>
           </div>
         </div>
